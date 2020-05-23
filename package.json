@@ -1,0 +1,29 @@
+{
+  "name": "noreset-auth",
+  "version": "1.0.0",
+  "module": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "prepublishOnly": "yarn run build",
+    "start": "babel-node src/index.js",
+    "dev": "babel-node src/index.js",
+    "watch": "nodemon",
+    "lint": "pretty-quick --check src/"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nedb-promises": "^4.0.3"
+  }
+}
