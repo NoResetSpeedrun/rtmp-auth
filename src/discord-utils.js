@@ -69,7 +69,7 @@ export const storeUser = async req => {
 };
 
 export const userCanStream = async req => {
-  const { username, token } = req.body;
+  const { name: username, token } = req.body;
   const user = await db.users.findOne({ username, token });
 
   // If the lookup fails, bail early

@@ -7,6 +7,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/discord-auth', async (req, res) => {
   try {
