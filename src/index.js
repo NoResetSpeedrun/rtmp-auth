@@ -1,14 +1,36 @@
+import express from 'express';
+import { storeUser, userCanStream } from './discord-utils';
+
 require('dotenv').config();
 
-const express = require('express');
 const app = express();
-
 const port = process.env.PORT || 3001;
 
-app.get('/', (req, res) => res.send('Checkity check check'));
-app.get('/discord-auth', (req, res) => {
-  console.log(req.query);
-  res.send('Yeeep');
+app.use(express.json());
+
+app.get('/discord-auth', async (req, res) => {
+  try {
+    const result = await storeUser(req);
+    res.json(result);
+  } catch {
+    res.status(500).send('Invalid request');
+  }
 });
 
-app.listen(port, () => console.log('Waiting!'));
+app.post('/check', async (req, res) => {
+  const fail = () => res.status(404).send('');
+
+  try {
+    const result = await userCanStream(req);
+
+    if (!result) {
+      return fail();
+    }
+  } catch {
+    return fail();
+  }
+
+  res.send('');
+});
+
+app.listen(port);
