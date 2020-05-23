@@ -31,7 +31,8 @@ app.post('/check', async (req, res) => {
     if (!result) {
       return fail();
     }
-  } catch {
+  } catch (e) {
+    console.log(e);
     return fail();
   }
 
