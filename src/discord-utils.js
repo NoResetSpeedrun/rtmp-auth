@@ -7,7 +7,8 @@ import db from './db';
 require('dotenv').config();
 
 const API_BASE = 'https://discord.com/api/v6';
-const makeRedirectUri = req => `${req.protocol}://${req.get('Host')}${req.path}`;
+const makeRedirectUri = req =>
+  `${req.protocol}://${proces.env.APP_HOST || req.get('Host')}${req.path}`;
 
 const exchangeToken = async req => {
   const { code } = req.query;
