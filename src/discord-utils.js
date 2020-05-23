@@ -72,11 +72,6 @@ export const userCanStream = async req => {
   const { username, token } = req.body;
   const user = await db.users.findOne({ username, token });
 
-  // Stubbed for now
-  if (username === 'willow' && token === user.token) {
-    return true;
-  }
-
   // If the lookup fails, bail early
   if (!username || !token || !user) {
     return false;
