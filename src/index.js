@@ -12,7 +12,8 @@ app.get('/discord-auth', async (req, res) => {
   try {
     const result = await storeUser(req);
     res.json(result);
-  } catch {
+  } catch (e) {
+    console.log(e);
     res.status(500).send('Invalid request');
   }
 });
