@@ -11,7 +11,7 @@ app.use(express.json());
 app.get('/discord-auth', async (req, res) => {
   try {
     const user = await storeUser(req);
-    res.send(`rtmp://noresetspeed.run/stream/${user.username}?token=${user.token}`);
+    res.send(`rtmp://rtmp.noresetspeed.run/stream/${user.username}?token=${user.token}`);
   } catch (e) {
     console.log(e);
     res.status(500).send('Invalid request');
