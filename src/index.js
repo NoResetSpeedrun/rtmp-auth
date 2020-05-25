@@ -1,4 +1,6 @@
 import express from 'express';
+import URLSearchParams from '@ungap/url-search-params';
+
 import { storeUser, userCanStream } from './discord-utils';
 
 require('dotenv').config();
@@ -12,10 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/discord-auth', async (req, res) => {
   try {
     const user = await storeUser(req);
-    res.json({
-      url: 'rtmp://rtmp.noresetspeed.run/stream',
-      streamKey: `${user.username}?token=${user.token}`,
-    });
+    const queryParams = new URLSearchParams({ stream_key: `${user.username}?token=${user.token}` });
+    res.redirect(`http://www.noresetspeed.run/en/profile/discord?${queryParams.toString()}`);
   } catch (e) {
     console.log(e);
     res.status(500).send('Invalid request');
