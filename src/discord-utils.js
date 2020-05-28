@@ -48,7 +48,8 @@ const getUserInfo = async req => {
   result.discordId = result.id;
   delete result.id;
 
-  result.username = result.username.toLowerCase();
+  // Lowercase and remove unicode
+  result.username = result.username.toLowerCase().replace(/[^\x00-\x7F]/g, '');
 
   return result;
 };
