@@ -49,7 +49,10 @@ const getUserInfo = async req => {
   delete result.id;
 
   // Lowercase and remove unicode
-  result.username = result.username.toLowerCase().replace(/[^\x00-\x7F]/g, '');
+  result.username = result.username
+    .toLowerCase()
+    .replace(/[^\x00-\x7F]/g, '')
+    .replace(/\s+/g, '');
 
   return result;
 };
