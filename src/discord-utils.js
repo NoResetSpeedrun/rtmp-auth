@@ -75,10 +75,15 @@ export const storeUser = async req => {
 export const userCanStream = async req => {
   const { name: username, token } = req.body;
   const user = await db.users.findOne({ username, token });
+  const permAuthUser = await db.permAuth.findOne({ username, token });
 
   // If the lookup fails, bail early
-  if (!username || !token || !user) {
+  if (!username || !token || (!user && !permAuthUser)) {
     return false;
+  }
+
+  if (permAuthUser) {
+    return true;
   }
 
   const response = await axios.get(

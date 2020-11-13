@@ -3,6 +3,7 @@ import Datastore from 'nedb-promises';
 const db = {};
 
 db.users = Datastore.create('users.db');
+db.permAuth = Datastore.create('permauth.db');
 
 db.users.ensureIndex({ fieldName: 'token' });
 db.users.ensureIndex({ fieldName: 'discordId' });
