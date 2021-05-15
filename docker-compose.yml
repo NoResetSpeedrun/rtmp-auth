@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+    restart: unless-stopped
+    volumes:
+      - .:/code
+      - /code/node_modules
+      - /code/lib
+    ports:
+      - 3001:3001
+  rtmp:
+    image: tiangolo/nginx-rtmp
+    restart: unless-stopped
+    ports:
+      - 1935:1935
+    restart: 'unless-stopped'
