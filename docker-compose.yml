@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    network_mode: host
     build:
       context: .
     restart: unless-stopped
@@ -11,6 +12,7 @@ services:
     ports:
       - 3001:3001
   rtmp:
+    network_mode: host
     build:
       context: .
       dockerfile: Dockerfile.rtmp
