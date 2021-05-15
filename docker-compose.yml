@@ -11,7 +11,8 @@ services:
     ports:
       - 3001:3001
   rtmp:
-    image: tiangolo/nginx-rtmp
+    build:
+      dockerfile: Dockerfile.rtmp
     restart: unless-stopped
     ports:
       - 1935:1935
