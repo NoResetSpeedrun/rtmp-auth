@@ -12,6 +12,7 @@ services:
       - 3001:3001
   rtmp:
     build:
+      context: .
       dockerfile: Dockerfile.rtmp
     restart: unless-stopped
     ports:
