@@ -6,7 +6,7 @@ import db from './db';
 
 require('dotenv').config();
 
-const API_BASE = 'https://discord.com/api/v6';
+const API_BASE = 'https://discord.com/api';
 const makeRedirectUri = req =>
   process.env.REDIRECT_URI || `${req.protocol}://${req.get('Host')}${req.path}`;
 
