@@ -15,7 +15,7 @@ app.get('/discord-auth', async (req, res) => {
   try {
     const user = await storeUser(req);
     const queryParams = new URLSearchParams({ stream_key: `${user.username}?token=${user.token}` });
-    const hostname = req.headers['x-forwarded-host'];
+    const hostname = await req.headers['x-forwarded-host'];
     const response = {
       'localhost' : 'http://localhost:3000/api/v1/user/discord/link', 
       'dev.noreset.tv' : 'https://dev.noreset.tv/api/v1/user/discord/link',
