@@ -11,6 +11,7 @@ const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.get('/discord-auth', async (req, res) => {
   try {
     const user = await storeUser(req);
@@ -22,6 +23,20 @@ app.get('/discord-auth', async (req, res) => {
       'noreset.tv' : 'https://noreset.tv/api/v1/user/discord/link',
       'noresetspeed.run' : 'http://www.noresetspeed.run/en/profile/discord',
     }*/
+    
+    res.redirect(`http://www.noresetspeed.run/en/profile/discord?${queryParams.toString()}`);
+    
+    
+  } catch (e) {
+    console.log(e);
+    res.status(500).send('Invalid request');
+  }
+});
+
+app.get('/discord-auth-dev', async (req, res) => {
+  try {
+    const user = await storeUser(req);
+    const queryParams = new URLSearchParams({ stream_key: `${user.username}?token=${user.token}` });
     
     res.redirect(`https://dev.noreset.tv/api/v1/user/discord/link?${queryParams.toString()}`);
     
