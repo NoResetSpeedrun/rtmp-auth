@@ -24,7 +24,7 @@ app.get('/discord-auth', async (req, res) => {
       'noresetspeed.run' : 'http://www.noresetspeed.run/en/profile/discord',
     }*/
     
-    res.redirect(`https://dev.noreset.tv/api/v1/user/discord/link?${queryParams.toString()}`);
+    res.redirect(`https://noreset.tv/api/v1/user/discord/link?${queryParams.toString()}`);
     
     
   } catch (e) {
