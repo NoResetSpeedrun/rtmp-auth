@@ -99,3 +99,29 @@ export const userCanStream = async req => {
 
   return response.data.roles.includes(process.env.STREAMER_ROLE_ID);
 };
+
+export const userCanCP = async req => {
+  const { name: username, token } = req.body;
+  const user = await db.users.findOne({ username, token });
+  const permAuthUser = await db.permAuth.findOne({ username, token });
+
+  // If the lookup fails, bail early
+  if (!username || !token || (!user && !permAuthUser)) {
+    return false;
+  }
+
+  if (permAuthUser) {
+    return true;
+  }
+
+  const response = await axios.get(
+    `${API_BASE}/guilds/${process.env.DISCORD_SERVER_ID}/members/${user.discordId}`,
+    {
+      headers: {
+        Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+      },
+    },
+  );
+
+  return response.data.roles.includes(process.env.CP_ROLE_ID);
+};
